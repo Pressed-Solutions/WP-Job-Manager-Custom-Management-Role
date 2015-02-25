@@ -3,7 +3,7 @@ Contributors: macbookandrew
 Tags: job listing, job board, job, jobs, company, hiring, employment, employees, candidate, freelance, internship, custom manager
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 Allows a user who has the 'edit_others_job_applications' capability to edit job applications posted by anyone.
 
@@ -78,6 +78,9 @@ If you want to restrict your jobmanager user(s) from accessing other areas of th
 
 
 == Changelog ==
+
+= 1.0.1 =
+* Update documentation
 
 = 1.0 =
 * Basic plugin
