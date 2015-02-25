@@ -15,10 +15,6 @@ Typically, only the user who posted a job can manage the applications. This plug
 
 Documentation for the core plugin and add-ons can be found [on the docs site here](https://wpjobmanager.com/documentation/).
 
-= Contributing and reporting bugs =
-
-You can contribute code to this plugin via GitHub: [https://github.com/Pressed-Solutions/WP-Job-Manager](https://github.com/Pressed-Solutions/WP-Job-Manager)
-
 == Installation ==
 
 = Automatic installation =
@@ -40,9 +36,45 @@ The manual installation method involves downloading the plugin and uploading it 
 Once installed, grant your user(s) the `edit_others_job_applications` capability.
 
 1. Using the [Members](https://wordpress.org/plugins/members/) plugin, you can create a new role and click a checkbox to grant the capability.
-2. Add this code to your `functions.php` file:
-`$user = new WP_User( $user_id );`
-`$user->add_cap( 'can_edit_posts' );`
+2. Or if you prefer to do it manually, add this code to your `functions.php` file:
+```
+$user = new WP_User( $user_id );
+$user->add_cap( 'can_edit_posts' );
+```
+
+If you want to restrict your jobmanager user(s) from accessing other areas of the WordPress control panel, add this code to your `functions.php` file (it expects a role named “jobmanager”):
+```
+// tweak dashboard for job manager role
+    function remove_admin_menus() {
+        remove_menu_page( 'index.php' );                        // Dashboard
+        remove_menu_page( 'edit.php' );                         // Posts
+        remove_menu_page( 'edit-comments.php' );                // Comments
+        remove_menu_page( 'tools.php' );                        // Tools
+    }
+    if ( appthemes_check_user_role( 'jobmanager' ) ) { add_action( 'admin_menu', 'remove_admin_menus' ); }
+
+    // hide jetpack admin menu item from non-admins
+    function remove_jetpack() {
+        if( class_exists( 'Jetpack' ) && !current_user_can( 'manage_options' ) ) {
+            remove_menu_page( 'jetpack' );
+        }
+    }
+    add_action( 'admin_init', 'remove_jetpack' );
+
+    // get logged-in user's role
+    function appthemes_check_user_role( $role, $user_id = null ) {
+
+        if ( is_numeric( $user_id ) )
+        $user = get_userdata( $user_id );
+        else
+            $user = wp_get_current_user();
+
+        if ( empty( $user ) )
+        return false;
+
+        return in_array( $role, (array) $user->roles );
+    }
+```
 
 
 == Changelog ==
