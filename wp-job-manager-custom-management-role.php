@@ -4,7 +4,7 @@ Plugin Name: WP Job Manager - Custom Management Role
 Plugin URI: https://github.com/Pressed-Solutions/WP-Job-Manager-Custom-Management-Role
 Description: Allow a user who has "edit_others_job_applications" capability to edit anybody's applications.
 Version: 1.0.1
-Author: AndrewRMinion Design
+Author: Andrew Minion
 Author URI: http://andrewrminion.com
 Requires at least: 3.8
 Tested up to: 4.1
