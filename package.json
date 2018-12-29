@@ -1,0 +1,6 @@
+{
+	"devDependencies": {
+		"grunt": "^1.0.3",
+		"grunt-wp-readme-to-markdown": "^2.0.1"
+	}
+}
